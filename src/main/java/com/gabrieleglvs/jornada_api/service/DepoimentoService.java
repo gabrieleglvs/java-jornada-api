@@ -9,6 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class DepoimentoService {
     @Autowired
@@ -22,5 +25,13 @@ public class DepoimentoService {
         var uri = uriBuilder.path("/depoimentos/{id}").buildAndExpand(depoimento.getId()).toUri();
 
         return ResponseEntity.created(uri).body(new DadosDetalhamentoDepoimento(depoimento));
+    }
+
+    public ResponseEntity listarDepoimentos() {
+        List<Depoimento> depoimentoList = iDepoimentoRepository.findAll();
+        var depoimentos = depoimentoList.stream()
+                .map(depoimento -> new DadosDetalhamentoDepoimento(depoimento))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(depoimentos);
     }
 }
