@@ -1,2 +1,6 @@
-package com.gabrieleglvs.jornada_api.dto;public class DadosCadastrarDepoimento {
+package com.gabrieleglvs.jornada_api.dto.depoimento;
+
+public record DadosCadastrarDepoimento(String foto,
+                                      String depoimento,
+                                      String nome) {
 }
