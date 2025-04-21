@@ -1,5 +1,6 @@
 package com.gabrieleglvs.jornada_api.service;
 
+import com.gabrieleglvs.jornada_api.dto.depoimento.DadosAtualizarDepoimento;
 import com.gabrieleglvs.jornada_api.dto.depoimento.DadosCadastrarDepoimento;
 import com.gabrieleglvs.jornada_api.dto.depoimento.DadosDetalhamentoDepoimento;
 import com.gabrieleglvs.jornada_api.model.Depoimento;
@@ -33,5 +34,11 @@ public class DepoimentoService {
                 .map(depoimento -> new DadosDetalhamentoDepoimento(depoimento))
                 .collect(Collectors.toList());
         return ResponseEntity.ok(depoimentos);
+    }
+
+    public ResponseEntity atualizarDepoimento(DadosAtualizarDepoimento dados) {
+        var depoimento = iDepoimentoRepository.getReferenceById(dados.id());
+        depoimento.atualizarDepoimento(dados);
+        return ResponseEntity.ok(new DadosDetalhamentoDepoimento(depoimento));
     }
 }

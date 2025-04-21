@@ -1,5 +1,6 @@
 package com.gabrieleglvs.jornada_api.model;
 
+import com.gabrieleglvs.jornada_api.dto.depoimento.DadosAtualizarDepoimento;
 import com.gabrieleglvs.jornada_api.dto.depoimento.DadosCadastrarDepoimento;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,12 @@ public class Depoimento {
     private String nome;
 
     public Depoimento(DadosCadastrarDepoimento dados) {
+        this.foto = dados.foto();
+        this.depoimento = dados.depoimento();
+        this.nome = dados.nome();
+    }
+
+    public void atualizarDepoimento(DadosAtualizarDepoimento dados){
         this.foto = dados.foto();
         this.depoimento = dados.depoimento();
         this.nome = dados.nome();

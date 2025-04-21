@@ -1,5 +1,6 @@
 package com.gabrieleglvs.jornada_api.controller;
 
+import com.gabrieleglvs.jornada_api.dto.depoimento.DadosAtualizarDepoimento;
 import com.gabrieleglvs.jornada_api.dto.depoimento.DadosCadastrarDepoimento;
 import com.gabrieleglvs.jornada_api.service.DepoimentoService;
 import jakarta.transaction.Transactional;
@@ -24,5 +25,10 @@ public class DepoimentoController {
     @GetMapping
     public ResponseEntity listarDepoimentos(){
         return service.listarDepoimentos();
+    }
+
+    @PutMapping
+    public ResponseEntity atualizarDepoimento(@RequestBody DadosAtualizarDepoimento dados){
+        return service.atualizarDepoimento(dados);
     }
 }
