@@ -10,24 +10,29 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
-@RequestMapping("depoimentos")
+@RequestMapping("")
 public class DepoimentoController {
     @Autowired
     private DepoimentoService service;
 
-    @PostMapping
+    @PostMapping("depoimentos")
     @Transactional
     public ResponseEntity cadastrar(@RequestBody DadosCadastrarDepoimento dados,
                                     UriComponentsBuilder uriBuilder){
         return service.cadastrarDepoimento(dados, uriBuilder);
     }
 
-    @GetMapping
+    @GetMapping("depoimentos")
     public ResponseEntity listarDepoimentos(){
         return service.listarDepoimentos();
     }
 
-    @PutMapping
+    @GetMapping("depoimentos-home")
+    public ResponseEntity listarTresDepoimentos() throws Exception {
+        return service.listarTresDepoimentos();
+    }
+
+    @PutMapping("depoimentos")
     public ResponseEntity atualizarDepoimento(@RequestBody DadosAtualizarDepoimento dados){
         return service.atualizarDepoimento(dados);
     }
