@@ -5,6 +5,7 @@ import com.gabrieleglvs.jornada_api.dto.depoimento.DadosCadastrarDepoimento;
 import com.gabrieleglvs.jornada_api.dto.depoimento.DadosDetalhamentoDepoimento;
 import com.gabrieleglvs.jornada_api.model.Depoimento;
 import com.gabrieleglvs.jornada_api.repository.IDepoimentoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -66,5 +67,14 @@ public class DepoimentoService {
         }
 
         return ResponseEntity.ok(tresDepoimentos);
+    }
+
+    public ResponseEntity deletarDepoimento(Long id) {
+        var depoimento = iDepoimentoRepository.findById(id);
+        if(depoimento.isEmpty()){
+            throw new EntityNotFoundException("Depoimento não encontrado!");
+        }
+        iDepoimentoRepository.delete(depoimento.get());
+        return ResponseEntity.noContent().build();
     }
 }
