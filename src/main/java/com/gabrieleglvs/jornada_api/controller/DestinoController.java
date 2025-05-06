@@ -1,12 +1,12 @@
 package com.gabrieleglvs.jornada_api.controller;
 
-import com.gabrieleglvs.jornada_api.service.DepoimentoService;
+import com.gabrieleglvs.jornada_api.dto.destino.DadosCadastrarDestino;
 import com.gabrieleglvs.jornada_api.service.DestinoService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("")
@@ -14,6 +14,13 @@ public class DestinoController {
 
     @Autowired
     private DestinoService service;
+
+    @PostMapping("destinos")
+    @Transactional
+    public ResponseEntity cadastrar(@RequestBody DadosCadastrarDestino dados,
+                                    UriComponentsBuilder uriBuilder){
+        return service.cadastrarDestino(dados, uriBuilder);
+    }
 
     @GetMapping("destinos")
     public ResponseEntity listarDestinos(){
