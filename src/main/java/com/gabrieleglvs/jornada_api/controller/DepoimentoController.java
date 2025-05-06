@@ -36,4 +36,10 @@ public class DepoimentoController {
     public ResponseEntity atualizarDepoimento(@RequestBody DadosAtualizarDepoimento dados){
         return service.atualizarDepoimento(dados);
     }
+
+    @DeleteMapping("depoimentos/{id}")
+    @Transactional
+    public ResponseEntity deletarDepoimento(@PathVariable Long id) {
+        return service.deletarDepoimento(id);
+    }
 }
