@@ -1,4 +1,4 @@
-package com.gabrieleglvs.jornada_api.dto;
+package com.gabrieleglvs.jornada_api.dto.destino;
 
 import com.gabrieleglvs.jornada_api.model.Destino;
 
