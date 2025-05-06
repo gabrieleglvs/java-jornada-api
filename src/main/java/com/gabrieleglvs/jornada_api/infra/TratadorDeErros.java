@@ -1,4 +1,4 @@
-package infra;
+package com.gabrieleglvs.jornada_api.infra;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 public class TratadorDeErros {
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity tratarErro404(EntityNotFoundException ex) {
-        var erro = new DadosErro("Recurso não encontrado: " + ex.getMessage(), LocalDateTime.now());
+        var erro = new DadosErro(ex.getMessage(), LocalDateTime.now());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
     }
 
