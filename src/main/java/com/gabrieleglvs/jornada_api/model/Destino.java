@@ -1,5 +1,6 @@
 package com.gabrieleglvs.jornada_api.model;
 
+import com.gabrieleglvs.jornada_api.dto.destino.DadosCadastrarDestino;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -19,4 +20,10 @@ public class Destino {
     private String foto;
     private String nome;
     private double preco;
+
+    public Destino(DadosCadastrarDestino dados) {
+        this.foto = dados.foto();
+        this.nome = dados.nome();
+        this.preco = dados.preco();
+    }
 }
