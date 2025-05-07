@@ -1,5 +1,6 @@
 package com.gabrieleglvs.jornada_api.controller;
 
+import com.gabrieleglvs.jornada_api.dto.destino.DadosAtualizarDestino;
 import com.gabrieleglvs.jornada_api.dto.destino.DadosCadastrarDestino;
 import com.gabrieleglvs.jornada_api.service.DestinoService;
 import jakarta.transaction.Transactional;
@@ -25,5 +26,11 @@ public class DestinoController {
     @GetMapping("destinos")
     public ResponseEntity listarDestinos(){
         return service.listarDestinos();
+    }
+
+    @PutMapping("destinos")
+    @Transactional
+    public ResponseEntity atualizarDestino(@RequestBody DadosAtualizarDestino dados) {
+        return service.atualizarDestino(dados);
     }
 }
