@@ -33,4 +33,10 @@ public class DestinoController {
     public ResponseEntity atualizarDestino(@RequestBody DadosAtualizarDestino dados) {
         return service.atualizarDestino(dados);
     }
+
+    @DeleteMapping("destinos/{id}")
+    @Transactional
+    public ResponseEntity deletarDestino(@PathVariable Long id) {
+        return service.deletarDestino(id);
+    }
 }
