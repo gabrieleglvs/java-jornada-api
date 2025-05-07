@@ -33,6 +33,7 @@ public class DepoimentoController {
     }
 
     @PutMapping("depoimentos")
+    @Transactional
     public ResponseEntity atualizarDepoimento(@RequestBody DadosAtualizarDepoimento dados){
         return service.atualizarDepoimento(dados);
     }
