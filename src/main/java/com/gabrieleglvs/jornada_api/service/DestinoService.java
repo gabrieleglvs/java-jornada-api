@@ -1,5 +1,6 @@
 package com.gabrieleglvs.jornada_api.service;
 
+import com.gabrieleglvs.jornada_api.dto.destino.DadosAtualizarDestino;
 import com.gabrieleglvs.jornada_api.dto.destino.DadosCadastrarDestino;
 import com.gabrieleglvs.jornada_api.dto.destino.DadosDetalhamentoDestino;
 import com.gabrieleglvs.jornada_api.model.Destino;
@@ -32,5 +33,12 @@ public class DestinoService {
                 .map(destino -> new DadosDetalhamentoDestino(destino))
                 .collect(Collectors.toList());
         return ResponseEntity.ok(destinos);
+    }
+
+    public ResponseEntity atualizarDestino(DadosAtualizarDestino dados) {
+        var destino = iDestinoRepository.getReferenceById(dados.id());
+        destino.atualizarDestino(dados);
+
+        return ResponseEntity.ok(new DadosDetalhamentoDestino(destino));
     }
 }
