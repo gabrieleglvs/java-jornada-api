@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,5 +51,19 @@ public class DestinoService {
         }
         iDestinoRepository.delete(destino.get());
         return ResponseEntity.noContent().build();
+    }
+
+    public ResponseEntity listarDestinoPorNome(String nome) {
+        var destinos = iDestinoRepository.findAllByNome(nome);
+        List<DadosDetalhamentoDestino> listaDestinos = new ArrayList<>();
+
+        if(!destinos.isEmpty()) {
+             listaDestinos = destinos.stream()
+                    .map(destino -> new DadosDetalhamentoDestino(destino))
+                    .collect(Collectors.toList());
+        } else {
+            throw new EntityNotFoundException("Nenhum destino foi encontrado!");
+        }
+        return ResponseEntity.ok(listaDestinos);
     }
 }
