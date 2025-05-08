@@ -5,6 +5,7 @@ import com.gabrieleglvs.jornada_api.dto.destino.DadosCadastrarDestino;
 import com.gabrieleglvs.jornada_api.dto.destino.DadosDetalhamentoDestino;
 import com.gabrieleglvs.jornada_api.model.Destino;
 import com.gabrieleglvs.jornada_api.repository.IDestinoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -40,5 +41,14 @@ public class DestinoService {
         destino.atualizarDestino(dados);
 
         return ResponseEntity.ok(new DadosDetalhamentoDestino(destino));
+    }
+
+    public ResponseEntity deletarDestino(Long id) {
+        var destino = iDestinoRepository.findById(id);
+        if(destino.isEmpty()) {
+            throw new EntityNotFoundException("Destino não encontrado!");
+        }
+        iDestinoRepository.delete(destino.get());
+        return ResponseEntity.noContent().build();
     }
 }
