@@ -23,9 +23,14 @@ public class DestinoController {
         return service.cadastrarDestino(dados, uriBuilder);
     }
 
-    @GetMapping("destinos")
+    @GetMapping("destinos/home")
     public ResponseEntity listarDestinos(){
         return service.listarDestinos();
+    }
+
+    @GetMapping("destinos")
+    public ResponseEntity listarDestinoPorNome(@RequestParam String nome) {
+        return service.listarDestinoPorNome(nome);
     }
 
     @PutMapping("destinos")
